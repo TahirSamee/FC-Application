@@ -2,38 +2,117 @@
     ViewData["Title"] = "Location Page";
 }
 <div class="content">
-    <!-- Heading -->
+    
     <div class="block block-rounded">
-        <div class="block-content block-content-full">
-            <div class="py-3 text-center">
+        <div class="block-content block-content-full p-1">
+            <div class="py-1 text-center">
                 <h1 class="h3 fw-extrabold mb-1">
                     Location
                 </h1>
-                @* <h2 class="fs-sm fw-medium text-muted mb-0">
-                    Multiple style options to match your preferences.
-                </h2> *@
             </div>
         </div>
-    </div>
-    <!-- END Heading -->
-    <!-- END Borderless Table -->
-   
-    <!-- Small Table -->
+    </div> 
     <div class="block block-rounded">
-        <div class="block-header block-header-default">
-            <h3 class="block-title">Small Table</h3>
+        <div class="block-header block-header-default ">
+            <div class="d-flex align-items-center gap-2">
+                <label class="mb-0 small">Show:</label>
+                <select class="form-select form-select-sm w-auto">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                </select>
+            </div>
+          
             <div class="block-options">
                 <div class="block-options-item">
-                    <code>.table-sm</code>
+                    <input type="search" class="form-control form-control-sm" placeholder="Search..." />
                 </div>
             </div>
         </div>
         <div class="block-content">
-            <select class="form-select">
-                <option>10</option>
-                <option>20</option>
-                <option>50</option>
-            </select>
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>SrNo</th>
+                            <th>SurveyorName</th>
+                            <th>LocationID</th>
+                            <th>SalesOrderID</th>
+                            <th>ClientLocationIdentifier</th>
+                            <th>Status</th>
+                            <th>ServiceDueDate</th>
+                            <th>ServiceDate</th>
+                            <th>Client</th>
+                            <th>Customer</th>
+                            <th>BrandName</th>
+                            <th>LocationNumber</th>
+                            <th>LocationNickname</th>
+                            <th>Service</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>Zip</th>
+                            <th>PhoneNumber</th>
+                            <th>Email</th>
+                            <th>ManagerName</th>
+                            <th>L1ManagerName</th>
+                            <th>L1ManagerEmail</th>
+                            <th>L1ManagerPhone</th>
+                            <th>L2ManagerName</th>
+                            <th>L2ManagerEmail</th>
+                            <th>L2ManagerPhone</th>
+                            <th>AssetsVerified</th>
+                            <th>AssetCount</th>
+                            <th>SqFt</th>
+                            <th>Value</th>
+                            <th>Notes</th>
+                            <th>Verifier</th>
+                            <th>DateVerified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Repeat rows here dynamically from your SQL data -->
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>123</td>
+                            <td>456789</td>
+                            <td>CL123</td>
+                            <td>Completed</td>
+                            <td>2025-07-15</td>
+                            <td>2025-07-16</td>
+                            <td>Acme Corp</td>
+                            <td>Jane Smith</td>
+                            <td>BrandX</td>
+                            <td>LOC789</td>
+                            <td>Main Office</td>
+                            <td>Cleaning</td>
+                            <td>123 Main St</td>
+                            <td>Springfield</td>
+                            <td>IL</td>
+                            <td>62701</td>
+                            <td>555-1234</td>
+                            <td>email@example.com</td>
+                            <td>Mike Manager</td>
+                            <td>Susan Lead</td>
+                            <td>susan@example.com</td>
+                            <td>555-5678</td>
+                            <td>Tom Director</td>
+                            <td>tom@example.com</td>
+                            <td>555-9012</td>
+                            <td>Yes</td>
+                            <td>24</td>
+                            <td>1500</td>
+                            <td>$12,000</td>
+                            <td>All good.</td>
+                            <td>Alice Auditor</td>
+                            <td>2025-07-17</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+
             <table class="table table-sm table-vcenter">
                 <thead>
                     <tr>
@@ -182,8 +261,12 @@
                     </tr>
                 </tbody>
             </table>
+
+            
+        </div>
+        <div class="block-content block-content-full block-content-sm bg-body-light fs-sm ">
             <nav aria-label="Page navigation">
-                <ul class="pagination pagination-sm">
+                <ul class="pagination pagination-sm justify-content-end mb-0">
                     <li class="page-item">
                         <a class="page-link" href="javascript:void(0)" aria-label="Previous">
                             <span aria-hidden="true">
@@ -212,7 +295,8 @@
                 </ul>
             </nav>
         </div>
+        
+            
+       
     </div>
-    <!-- END Small Table -->
-    
 </div>
