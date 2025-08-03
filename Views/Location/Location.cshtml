@@ -2,83 +2,81 @@
     ViewData["Title"] = "Location Page";
 }
 <div class="content">
-    
-    <div class="block block-rounded">
-        <div class="block-content block-content-full p-1">
-            <div class="py-1 text-center">
-                <h1 class="h3 fw-extrabold mb-1">
-                    Location
-                </h1>
-            </div>
+    <div class="block block-rounded shadow-sm border">
+        <div class="block-header block-header-default bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="block-title mb-0">Location</h3>
+            <a asp-controller="Location" asp-action="LocationCreate" class="btn btn-light btn-sm text-primary">
+                <i class="fa fa-plus me-1"></i> Create Location
+            </a>
         </div>
-    </div> 
-    <div class="block block-rounded">
-        <div class="block-header block-header-default ">
-            <div class="d-flex align-items-center gap-2">
-                <label class="mb-0 small">Show:</label>
-                <select class="form-select form-select-sm w-auto">
-                    <option>10</option>
-                    <option>20</option>
-                    <option>50</option>
-                </select>
-            </div>
-          
-            <div class="block-options">
-                <div class="block-options-item">
-                    <input type="search" class="form-control form-control-sm" placeholder="Search..." />
+
+        <div class="block-content p-3">
+            <!-- Filter controls -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 small fw-semibold text-muted">Show:</label>
+                    <select class="form-select form-select-sm w-auto">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="search" class="form-control form-control-sm" placeholder="Search..." style="width: 180px;" />
                 </div>
             </div>
-        </div>
-        <div class="block-content">
-            <div class="table-responsive">
-                <table class="table table-sm table-bordered table-hover">
-                    <thead class="table-light">
+
+            <!-- Table -->
+            <div class="table-responsive table-responsive-sticky text-center p-0 m-0 rounded">
+                <table class="table table-sm table-hover align-middle table-bordered mb-0">
+                    <thead class="table-dark text-center text-nowrap sticky-top">
                         <tr>
-                            <th>SrNo</th>
-                            <th>SurveyorName</th>
-                            <th>LocationID</th>
-                            <th>SalesOrderID</th>
-                            <th>ClientLocationIdentifier</th>
+                            <th>#</th>
+                            <th>Surveyor</th>
+                            <th>Location ID</th>
+                            <th>Order ID</th>
+                            <th>Client Identifier</th>
                             <th>Status</th>
-                            <th>ServiceDueDate</th>
-                            <th>ServiceDate</th>
+                            <th>Due Date</th>
+                            <th>Service Date</th>
                             <th>Client</th>
                             <th>Customer</th>
-                            <th>BrandName</th>
-                            <th>LocationNumber</th>
-                            <th>LocationNickname</th>
+                            <th>Brand</th>
+                            <th>Location #</th>
+                            <th>Nickname</th>
                             <th>Service</th>
                             <th>Address</th>
                             <th>City</th>
                             <th>State</th>
-                            <th>Zip</th>
-                            <th>PhoneNumber</th>
+                            <th>ZIP</th>
+                            <th>Phone</th>
                             <th>Email</th>
-                            <th>ManagerName</th>
-                            <th>L1ManagerName</th>
-                            <th>L1ManagerEmail</th>
-                            <th>L1ManagerPhone</th>
-                            <th>L2ManagerName</th>
-                            <th>L2ManagerEmail</th>
-                            <th>L2ManagerPhone</th>
-                            <th>AssetsVerified</th>
-                            <th>AssetCount</th>
-                            <th>SqFt</th>
+                            <th>Manager</th>
+                            <th>L1 Manager</th>
+                            <th>L1 Email</th>
+                            <th>L1 Phone</th>
+                            <th>L2 Manager</th>
+                            <th>L2 Email</th>
+                            <th>L2 Phone</th>
+                            <th>Verified</th>
+                            <th># Assets</th>
+                            <th>Sq Ft</th>
                             <th>Value</th>
                             <th>Notes</th>
                             <th>Verifier</th>
-                            <th>DateVerified</th>
+                            <th>Verified Date</th>
+                            <th class="d-none d-sm-table-cell">Access</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Repeat rows here dynamically from your SQL data -->
+                    <tbody class="text-center text-nowrap p-0 m-0 align-middle">
                         <tr>
-                            <td>1</td>
+                            <th scope="row">1</th>
                             <td>John Doe</td>
                             <td>123</td>
                             <td>456789</td>
                             <td>CL123</td>
-                            <td>Completed</td>
+                            <td><span class="badge bg-success">Completed</span></td>
                             <td>2025-07-15</td>
                             <td>2025-07-16</td>
                             <td>Acme Corp</td>
@@ -100,203 +98,77 @@
                             <td>Tom Director</td>
                             <td>tom@example.com</td>
                             <td>555-9012</td>
-                            <td>Yes</td>
+                            <td><span class="badge bg-info text-dark">Yes</span></td>
                             <td>24</td>
                             <td>1500</td>
                             <td>$12,000</td>
                             <td>All good.</td>
                             <td>Alice Auditor</td>
                             <td>2025-07-17</td>
+                            <td class="d-none d-sm-table-cell">
+                                <span class="badge bg-warning text-dark">Trial</span>
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
+                                        <i class="fa fa-pencil-alt"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
                         </tr>
-                        <!-- Add more rows as needed -->
                     </tbody>
                 </table>
             </div>
-
-            <table class="table table-sm table-vcenter">
-                <thead>
-                    <tr>
-                        <th class="text-center" style="width: 50px;"></th>
-                        <th>Name</th>
-                        <th class="d-none d-sm-table-cell" style="width: 15%;">Access</th>
-                        <th class="text-center" style="width: 100px;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th class="text-center" scope="row">1</th>
-                        <td>Ryan Flores</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-warning">Trial</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">2</th>
-                        <td>Albert Ray</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-warning">Trial</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">3</th>
-                        <td>Lori Moore</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-danger">Disabled</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">4</th>
-                        <td>Laura Carr</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-info">Business</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">5</th>
-                        <td>Jeffrey Shaw</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-warning">Trial</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">6</th>
-                        <td>Betty Kelley</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-danger">Disabled</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">7</th>
-                        <td>Thomas Riley</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-success">VIP</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="text-center" scope="row">8</th>
-                        <td>Andrea Gardner</td>
-                        <td class="d-none d-sm-table-cell">
-                            <span class="badge bg-info">Business</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Edit">
-                                    <i class="fa fa-pencil-alt"></i>
-                                </button>
-                                <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="tooltip" title="Delete">
-                                    <i class="fa fa-times"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            
         </div>
-        <div class="block-content block-content-full block-content-sm bg-body-light fs-sm ">
+
+        <!-- Pagination -->
+        <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-sm justify-content-end mb-0">
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Previous">
-                            <span aria-hidden="true">
-                                <i class="fa fa-angle-left"></i>
-                            </span>
-                            <span class="sr-only">Previous</span>
+                    <li class="page-item disabled">
+                        <a class="page-link shadow-sm" href="javascript:void(0)" aria-label="Previous">
+                            <i class="fa fa-angle-left"></i>
                         </a>
                     </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">1</a>
+                    <li class="page-item active">
+                        <a class="page-link bg-primary text-white shadow-sm border-0" href="javascript:void(0)">1</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">2</a>
+                        <a class="page-link shadow-sm" href="javascript:void(0)">2</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)">3</a>
+                        <a class="page-link shadow-sm" href="javascript:void(0)">3</a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="javascript:void(0)" aria-label="Next">
-                            <span aria-hidden="true">
-                                <i class="fa fa-angle-right"></i>
-                            </span>
-                            <span class="sr-only">Next</span>
+                        <a class="page-link shadow-sm" href="javascript:void(0)" aria-label="Next">
+                            <i class="fa fa-angle-right"></i>
                         </a>
                     </li>
                 </ul>
             </nav>
         </div>
-        
-            
-       
+
     </div>
 </div>
+<style>
+    .pagination .page-link {
+        transition: 0.2s ease-in-out;
+        padding: 6px 12px;
+        box-shadow: none;
+    }
+
+        .pagination .page-link:hover {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+</style>

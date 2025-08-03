@@ -8,5 +8,9 @@ namespace FC_Application.Controllers
         {
             return View();
         }
+        public IActionResult LocationCreate()
+        {
+            return View();
+        }
     }
 }

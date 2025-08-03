@@ -1,0 +1,183 @@
+﻿@{
+    ViewData["Title"] = "Location Create";
+}
+<div class="content">
+    <form action="be_blocks_forms.html" method="POST" class="needs-validation" novalidate>
+        <div class="block block-rounded shadow-sm border">
+            <div class="block-header block-header-default bg-primary text-white">
+                <h3 class="block-title">Create Location Entry</h3>
+            </div>
+
+            <div class="block-content">
+                <div class="row g-3">
+                    <!-- First Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Surveyor" placeholder="Surveyor" required>
+                            <label>Surveyor</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="LocationID" placeholder="Location ID">
+                            <label>Location ID</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="OrderID" placeholder="Order ID">
+                            <label>Order ID</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="ClientIdentifier" placeholder="Client Identifier">
+                            <label>Client Identifier</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="Status">
+                                <option value="Pending">Pending</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                            <label>Status</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="DueDate" placeholder="Due Date">
+                            <label>Due Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="ServiceDate" placeholder="Service Date">
+                            <label>Service Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Client" placeholder="Client">
+                            <label>Client</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Customer" placeholder="Customer">
+                            <label>Customer</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Brand" placeholder="Brand">
+                            <label>Brand</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="LocationNumber" placeholder="Location Number">
+                            <label>Location #</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="LocationNickname" placeholder="Nickname">
+                            <label>Nickname</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Service" placeholder="Service">
+                            <label>Service</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Address" placeholder="Address">
+                            <label>Address</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="City" placeholder="City">
+                            <label>City</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="State" placeholder="State">
+                            <label>State</label>
+                        </div>
+                    </div>
+
+                    <!-- Second Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="ZIP" placeholder="ZIP">
+                            <label>ZIP</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" name="Phone" placeholder="Phone">
+                            <label>Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="Email" placeholder="Email">
+                            <label>Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Manager" placeholder="Manager">
+                            <label>Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="L1Manager" placeholder="L1 Manager">
+                            <label>L1 Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="L1Email" placeholder="L1 Email">
+                            <label>L1 Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" name="L1Phone" placeholder="L1 Phone">
+                            <label>L1 Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="L2Manager" placeholder="L2 Manager">
+                            <label>L2 Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" name="L2Email" placeholder="L2 Email">
+                            <label>L2 Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" name="L2Phone" placeholder="L2 Phone">
+                            <label>L2 Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="Verified">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <label>Verified</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" name="Assets" placeholder="# Assets">
+                            <label># Assets</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" name="SqFt" placeholder="Sq Ft">
+                            <label>Sq Ft</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Value" placeholder="Value">
+                            <label>Value</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" name="Notes" style="height: 80px" placeholder="Notes"></textarea>
+                            <label>Notes</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="Verifier" placeholder="Verifier">
+                            <label>Verifier</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" name="VerifiedDate" placeholder="Verified Date">
+                            <label>Verified Date</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
+                <!-- Left side: Back button -->
+                <div>
+                    <a href="javascript:history.back()" class="btn btn-alt-dark">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+
+                <!-- Right side: Reset and Submit buttons -->
+                <div>
+                    <button type="reset" class="btn btn-alt-secondary me-2">
+                        <i class="fa fa-sync-alt me-1"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-alt-primary">
+                        <i class="fa fa-check me-1"></i> Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
