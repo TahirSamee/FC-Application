@@ -1,6 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Location Page";
 }
+<style>
+    .pagination .page-link {
+        transition: 0.2s ease-in-out;
+        padding: 6px 12px;
+        box-shadow: none;
+    }
+
+        .pagination .page-link:hover {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+</style>
 <div class="content">
     <div class="block block-rounded shadow-sm border">
         <div class="block-header block-header-default bg-primary text-white d-flex justify-content-between align-items-center">
@@ -109,11 +128,11 @@
                                 <span class="badge bg-warning text-dark">Trial</span>
                             </td>
                             <td>
-                                <div class="btn-group btn-group-sm">
-                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit">
                                         <i class="fa fa-pencil-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="tooltip" title="Delete">
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </div>
@@ -153,22 +172,4 @@
 
     </div>
 </div>
-<style>
-    .pagination .page-link {
-        transition: 0.2s ease-in-out;
-        padding: 6px 12px;
-        box-shadow: none;
-    }
 
-        .pagination .page-link:hover {
-            background-color: #f0f0f0;
-            color: #000;
-        }
-
-    .pagination .page-item.active .page-link {
-        background-color: #0d6efd;
-        color: white;
-        font-weight: 500;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    }
-</style>
