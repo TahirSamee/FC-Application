@@ -1,8 +1,9 @@
-﻿@{
+﻿@model FC_Application.Models.Location;
+@{
     ViewData["Title"] = "Location Create";
 }
 <div class="content">
-    <form action="be_blocks_forms.html" method="POST" class="needs-validation" novalidate>
+    <form asp-action="LocationCreate" asp-controller="Location" method="post" class="needs-validation" novalidate>
         <div class="block block-rounded shadow-sm border">
             <div class="block-header block-header-default bg-primary text-white">
                 <h3 class="block-title">Create Location Entry</h3>
@@ -13,31 +14,42 @@
                     <!-- First Column -->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Surveyor" placeholder="Surveyor" required>
+                            <input type="text" class="form-control" name="SurveyorName" placeholder="Surveyor" >
                             <label>Surveyor</label>
+                            
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="LocationID" placeholder="Location ID">
+                            <input type="text" class="form-control" name="LocationID" placeholder="Location ID" required>
                             <label>Location ID</label>
+                            <span asp-validation-for="LocationID" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="OrderID" placeholder="Order ID">
+                            <input type="text" class="form-control" name="SalesOrderID" placeholder="Order ID" required>
+
                             <label>Order ID</label>
+                            <span asp-validation-for="SalesOrderID" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="ClientIdentifier" placeholder="Client Identifier">
+                            <input type="text" class="form-control" name="ClientLocationIdentifier" placeholder="Client Identifier">
                             <label>Client Identifier</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" name="Status">
-                                <option value="Pending">Pending</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Cancelled">Cancelled</option>
+                            <select class="form-select" name="Status" required>
+
+                                <option value="Pending Schedule">Pending Schedule</option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Survey Complete">Survey Complete</option>
+                                <option value="Verified">Verified</option>
+                                <option value="QA/QC">QA/QC</option>
+                                <option value="Return Visit">Return Visit</option>
+                                <option value="Complete">Complete</option>
+                                <option value="Invoiced">Invoiced</option>
                             </select>
                             <label>Status</label>
+                            <span asp-validation-for="Status" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" name="DueDate" placeholder="Due Date">
+                            <input type="date" class="form-control" name="ServiceDueDate" placeholder="Due Date">
                             <label>Due Date</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -45,16 +57,21 @@
                             <label>Service Date</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Client" placeholder="Client">
-                            <label>Client</label>
+                            <input type="text" class="form-control" name="Client" placeholder="Client" required>
+
+                            <label>Client<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Client" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name="Customer" placeholder="Customer">
                             <label>Customer</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Brand" placeholder="Brand">
-                            <label>Brand</label>
+                            <input type="text" class="form-control" name="BrandName" placeholder="Brand" required>
+
+
+                            <label>Brand<span class="text-danger">*</span></label>
+                            <span asp-validation-for="BrandName" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name="LocationNumber" placeholder="Location Number">
@@ -65,31 +82,44 @@
                             <label>Nickname</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Service" placeholder="Service">
+                            <input type="text" class="form-control" name="Service" placeholder="Service" required>
+
                             <label>Service</label>
+                            <span asp-validation-for="Service" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Address" placeholder="Address">
-                            <label>Address</label>
+                            <input type="text" class="form-control" name="Address" placeholder="Address" required>
+
+                            <label>Address<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="City" placeholder="City">
-                            <label>City</label>
+                            <input type="text" class="form-control" name="City" placeholder="City" required>
+
+                            <label>City<span class="text-danger">*</span></label>
+                            <span asp-validation-for="City" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="State" placeholder="State">
-                            <label>State</label>
+                            <input type="text" class="form-control" name="State" placeholder="State" required>
+
+                            <label>State<span class="text-danger">*</span></label>
+                            <span asp-validation-for="State" class="text-danger"></span>
                         </div>
                     </div>
 
                     <!-- Second Column -->
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="ZIP" placeholder="ZIP">
-                            <label>ZIP</label>
+                           
+                           
+
+                            <input type="text" class="form-control" name="Zip" placeholder="ZIP" required>
+
+                            <label>ZIP<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Zip" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="tel" class="form-control" name="Phone" placeholder="Phone">
+                            <input type="tel" class="form-control" name="PhoneNumber" placeholder="Phone">
                             <label>Phone</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -97,47 +127,50 @@
                             <label>Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Manager" placeholder="Manager">
+                            <input type="text" class="form-control" name="ManagerName" placeholder="Manager">
                             <label>Manager</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="L1Manager" placeholder="L1 Manager">
+                            <input type="text" class="form-control" name="L1ManagerName" placeholder="L1 Manager">
                             <label>L1 Manager</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" name="L1Email" placeholder="L1 Email">
+                            <input type="email" class="form-control" name="L1ManagerEmail" placeholder="L1 Email">
                             <label>L1 Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="tel" class="form-control" name="L1Phone" placeholder="L1 Phone">
+                            <input type="tel" class="form-control" name="L1ManagerPhone" placeholder="L1 Phone">
                             <label>L1 Phone</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="L2Manager" placeholder="L2 Manager">
+                            <input type="text" class="form-control" name="L2ManagerName" placeholder="L2 Manager">
                             <label>L2 Manager</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" name="L2Email" placeholder="L2 Email">
+                            <input type="email" class="form-control" name="L2ManagerEmail" placeholder="L2 Email">
                             <label>L2 Email</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="tel" class="form-control" name="L2Phone" placeholder="L2 Phone">
+                            <input type="tel" class="form-control" name="L2ManagerPhone" placeholder="L2 Phone">
                             <label>L2 Phone</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select class="form-select" name="Verified">
+                            <select class="form-select" name="AssetsVerified">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
                             </select>
                             <label>Verified</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" name="Assets" placeholder="# Assets">
+                            <input type="number" class="form-control" name="AssetCount" placeholder="# Assets">
                             <label># Assets</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" name="SqFt" placeholder="Sq Ft">
-                            <label>Sq Ft</label>
+                            <input type="number" class="form-control" name="SqFt" placeholder="Sq Ft" required>
+
+                            <label>Sq Ft<span class="text-danger">*</span></label>
+                            <span asp-validation-for="SqFt" class="text-danger"></span>
+
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" name="Value" placeholder="Value">
@@ -152,22 +185,22 @@
                             <label>Verifier</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="date" class="form-control" name="VerifiedDate" placeholder="Verified Date">
+                            <input type="date" class="form-control" name="DateVerified" placeholder="Verified Date">
                             <label>Verified Date</label>
                         </div>
                     </div>
                 </div>
             </div>
+            @* Shows all validation errors *@
+           
+            
 
             <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
-                <!-- Left side: Back button -->
                 <div>
-                    <a href="javascript:history.back()" class="btn btn-alt-dark">
+                    <a href="\Location\Location" class="btn btn-alt-dark">
                         <i class="fa fa-arrow-left me-1"></i> Back
                     </a>
                 </div>
-
-                <!-- Right side: Reset and Submit buttons -->
                 <div>
                     <button type="reset" class="btn btn-alt-secondary me-2">
                         <i class="fa fa-sync-alt me-1"></i> Reset
@@ -177,7 +210,12 @@
                     </button>
                 </div>
             </div>
-
         </div>
     </form>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
 </div>
+
