@@ -40,5 +40,105 @@ namespace FC_Application.Repository
                 return rowsAffected > 0;
             }
         }
+
+
+        public async Task<IEnumerable<Location>> GetPagedLocationsAsync(string search, int page, int pageSize)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = @"
+            SELECT * FROM Location
+            WHERE (@Search = '' OR Client LIKE '%' + @Search + '%' OR LocationID LIKE '%' + @Search + '%')
+            ORDER BY SrNo
+            OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+        ";
+
+                return await connection.QueryAsync<Location>(sql, new
+                {
+                    Search = search ?? "",
+                    Offset = (page - 1) * pageSize,
+                    PageSize = pageSize
+                });
+            }
+        }
+
+        public async Task<int> GetTotalCountAsync(string search)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = @"
+            SELECT COUNT(*) FROM Location
+            WHERE (@Search = '' OR Client LIKE '%' + @Search + '%' OR LocationID LIKE '%' + @Search + '%');
+        ";
+
+                return await connection.ExecuteScalarAsync<int>(sql, new { Search = search ?? "" });
+            }
+        }
+
+        public async Task<Location?> GetLocationByIdAsync(int SrNo)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT * FROM Location WHERE SrNo = @SrNo";
+                return await connection.QueryFirstOrDefaultAsync<Location>(sql, new { SrNo = SrNo });
+            }
+        }
+
+        public async Task<bool> UpdateLocationAsync(Location location)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = @"
+        UPDATE Location SET
+            SurveyorName = @SurveyorName,
+            SalesOrderID = @SalesOrderID,
+            ClientLocationIdentifier = @ClientLocationIdentifier,
+            Status = @Status,
+            ServiceDueDate = @ServiceDueDate,
+            ServiceDate = @ServiceDate,
+            Client = @Client,
+            Customer = @Customer,
+            BrandName = @BrandName,
+            LocationNumber = @LocationNumber,
+            LocationNickname = @LocationNickname,
+            Service = @Service,
+            Address = @Address,
+            City = @City,
+            State = @State,
+            Zip = @Zip,
+            PhoneNumber = @PhoneNumber,
+            Email = @Email,
+            ManagerName = @ManagerName,
+            L1ManagerName = @L1ManagerName,
+            L1ManagerEmail = @L1ManagerEmail,
+            L1ManagerPhone = @L1ManagerPhone,
+            L2ManagerName = @L2ManagerName,
+            L2ManagerEmail = @L2ManagerEmail,
+            L2ManagerPhone = @L2ManagerPhone,
+            AssetsVerified = @AssetsVerified,
+            AssetCount = @AssetCount,
+            SqFt = @SqFt,
+            Value = @Value,
+            Notes = @Notes,
+            Verifier = @Verifier,
+            DateVerified = @DateVerified
+        WHERE SrNo = @SrNo;
+        ";
+
+                var rows = await connection.ExecuteAsync(sql, location);
+                return rows > 0;
+            }
+        }
+
+        public async Task<bool> DeleteLocationAsync(int SrNo)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "DELETE FROM Location WHERE SrNo = @SrNo";
+                var rows = await connection.ExecuteAsync(sql, new { SrNo = SrNo });
+                return rows > 0;
+            }
+        }
+
     }
 }

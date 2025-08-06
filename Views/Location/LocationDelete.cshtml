@@ -1,0 +1,46 @@
+﻿@model Location
+@{
+    ViewData["Title"] = "Location Delete ";
+}
+
+<div class="content">
+    <form asp-action="DeleteConfirmed">
+
+        <div class="block block-rounded shadow-sm border">
+            <div class="block-header block-header-default bg-primary text-white">
+                <h3 class="block-title">Delete Location Entry</h3>
+            </div>
+            <input type="hidden" asp-for="SrNo" />
+            <div class="block-content">
+                <h4>Are you sure you want to delete location ?</h4>
+
+                <ol class="mb-2">
+                    <li><strong>Sr No:</strong> @Model.SrNo</li>
+                    <li><strong>Surveyor:</strong> @Model.SurveyorName</li>
+                    <li><strong>Location ID:</strong> @Model.LocationID</li>
+                    <li><strong>Sales Order ID:</strong> @Model.SalesOrderID</li>
+                    <li><strong>Address:</strong> @Model.Address</li>
+                    <li><strong>Client:</strong> @Model.Client</li>
+                    <li><strong>Status:</strong> <span class="badge bg-info"> @Model.Status</span></li>
+                    
+                </ol>
+                
+            </div>
+            <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
+                <div>
+                    <a href="\Location\Location" class="btn btn-alt-dark">
+                        <i class="fa fa-arrow-left me-1"></i> Cancel
+                    </a>
+                </div>
+                <div>
+                    @* <button type="reset" class="btn btn-alt-secondary me-2">
+                    <i class="fa fa-sync-alt me-1"></i> Reset
+                    </button> *@
+                    <button type="submit" class="btn btn-alt-danger">
+                        <i class="fa fa-check me-1"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

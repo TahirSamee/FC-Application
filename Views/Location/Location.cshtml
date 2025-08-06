@@ -1,6 +1,12 @@
-﻿@{
+﻿@model IEnumerable<Location>
+@{
     ViewData["Title"] = "Location";
+    var page = ViewBag.Page ?? 1;
+    var totalPages = ViewBag.TotalPages ?? 1;
+    var pageSize = ViewBag.PageSize ?? 10;
+    var search = ViewBag.Search ?? "";
 }
+
 <style>
     .pagination .page-link {
         transition: 0.2s ease-in-out;
@@ -30,8 +36,21 @@
         </div>
 
         <div class="block-content p-3">
-            <!-- Filter controls -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+            <form asp-action="Location" method="get" class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 small fw-semibold text-muted">Show:</label>
+                    <select name="pageSize" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+                        <option value="10" selected="@((int)pageSize == 10)">10</option>
+                        <option value="20" selected="@((int)pageSize == 20)">20</option>
+                        <option value="50" selected="@((int)pageSize == 50)">50</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="search" name="search" class="form-control form-control-sm" value="@search" placeholder="Search..." style="width: 180px;" />
+                </div>
+            </form>
+
+            @* <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                 <div class="d-flex align-items-center gap-2">
                     <label class="mb-0 small fw-semibold text-muted">Show:</label>
                     <select class="form-select form-select-sm w-auto">
@@ -43,7 +62,7 @@
                 <div>
                     <input type="search" class="form-control form-control-sm" placeholder="Search..." style="width: 180px;" />
                 </div>
-            </div>
+            </div> *@
 
             <!-- Table -->
             <div class="table-responsive table-responsive-sticky text-center p-0 m-0 rounded">
@@ -89,6 +108,67 @@
                         </tr>
                     </thead>
                     <tbody class="text-center text-nowrap p-0 m-0 align-middle">
+                        @if (!Model.Any())
+                        {
+                            <tr><td colspan="36" class="text-center text-muted">No records found.</td></tr>
+                        }
+                        else
+                        {
+                            int rowNum = ((int)page - 1) * (int)pageSize;
+                            foreach (var loc in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(++rowNum)</th>
+                                    <td>@loc.SurveyorName</td>
+                                    <td>@loc.LocationID</td>
+                                    <td>@loc.SalesOrderID</td>
+                                    <td>@loc.ClientLocationIdentifier</td>
+                                    <td><span class="badge bg-info">@loc.Status</span></td>
+                                    <td>@loc.ServiceDueDate</td>
+                                    <td>@loc.ServiceDate</td>
+                                    <td>@loc.Client</td>
+                                    <td>@loc.Customer</td>
+                                    <td>@loc.BrandName</td>
+                                    <td>@loc.LocationNumber</td>
+                                    <td>@loc.LocationNickname</td>
+                                    <td>@loc.Service</td>
+                                    <td>@loc.Address</td>
+                                    <td>@loc.City</td>
+                                    <td>@loc.State</td>
+                                    <td>@loc.Zip</td>
+                                    <td>@loc.PhoneNumber</td>
+                                    <td>@loc.Email</td>
+                                    <td>@loc.ManagerName</td>
+                                    <td>@loc.L1ManagerName</td>
+                                    <td>@loc.L1ManagerEmail</td>
+                                    <td>@loc.L1ManagerPhone</td>
+                                    <td>@loc.L2ManagerName</td>
+                                    <td>@loc.L2ManagerEmail</td>
+                                    <td>@loc.L2ManagerPhone</td>
+                                    <td>@loc.AssetsVerified</td>
+                                    <td>@loc.AssetCount</td>
+                                    <td>@loc.SqFt</td>
+                                    <td>@loc.Value</td>
+                                    <td>@loc.Notes</td>
+                                    <td>@loc.Verifier</td>
+                                    <td>@loc.DateVerified</td>
+                                    <td class="d-none d-sm-table-cell"><span class="badge bg-warning text-dark">Trial</span></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a asp-action="LocationEdit" asp-route-SrNo="@loc.SrNo" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </a>
+                                            <a asp-action="LocationDelete" asp-route-SrNo="@loc.SrNo" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                    @* <tbody class="text-center text-nowrap p-0 m-0 align-middle">
                         <tr>
                             <th scope="row">1</th>
                             <td>John Doe</td>
@@ -138,13 +218,36 @@
                                 </div>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody> *@
                 </table>
             </div>
         </div>
+        <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
+        <nav aria-label="Page navigation">
+    <ul class="pagination pagination-sm justify-content-end mb-0">
+        <li class="page-item @(page <= 1 ? "disabled" : "")">
+                    <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page - 1, pageSize = pageSize })">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        </li>
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == page ? "active" : "")">
+                <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
+                           href="@Url.Action("Location", new { search = search, page = i, pageSize = pageSize })">@i</a>
+            </li>
+        }
+        <li class="page-item @(page >= totalPages ? "disabled" : "")">
+                    <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page + 1, pageSize = pageSize })">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+        </div>
 
         <!-- Pagination -->
-        <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
+        @* <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-sm justify-content-end mb-0">
                     <li class="page-item disabled">
@@ -168,7 +271,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> *@
 
     </div>
 </div>

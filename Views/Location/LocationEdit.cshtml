@@ -1,0 +1,222 @@
+﻿@model Location
+@{
+    ViewData["Title"] = "Location Edit ";
+}
+
+<div class="content">
+    <form asp-action="LocationEdit" asp-controller="Location" method="post" class="needs-validation" novalidate>
+        <div class="block block-rounded shadow-sm border">
+            <div class="block-header block-header-default bg-primary text-white">
+                <h3 class="block-title">Edit Location Entry</h3>
+            </div>
+            <input hidden asp-for="SrNo" />
+            <div class="block-content">
+                <div class="row g-3">
+                    <!-- First Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="SurveyorName" placeholder="Surveyor" >
+                            <label>Surveyor</label>
+                            
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="LocationID" placeholder="Location ID" required>
+                            <label>Location ID</label>
+                            <span asp-validation-for="LocationID" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="SalesOrderID" placeholder="Order ID" required>
+
+                            <label>Order ID</label>
+                            <span asp-validation-for="SalesOrderID" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="ClientLocationIdentifier" placeholder="Client Identifier">
+                            <label>Client Identifier</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="Status" required>
+
+                                <option value="Pending Schedule">Pending Schedule</option>
+                                <option value="Scheduled">Scheduled</option>
+                                <option value="Survey Complete">Survey Complete</option>
+                                <option value="Verified">Verified</option>
+                                <option value="QA/QC">QA/QC</option>
+                                <option value="Return Visit">Return Visit</option>
+                                <option value="Complete">Complete</option>
+                                <option value="Invoiced">Invoiced</option>
+                            </select>
+                            <label>Status</label>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" asp-for="ServiceDueDate" placeholder="Due Date">
+                            <label>Due Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" asp-for="ServiceDate" placeholder="Service Date">
+                            <label>Service Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Client" placeholder="Client" required>
+
+                            <label>Client<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Client" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Customer" placeholder="Customer">
+                            <label>Customer</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="BrandName" placeholder="Brand" required>
+
+
+                            <label>Brand<span class="text-danger">*</span></label>
+                            <span asp-validation-for="BrandName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="LocationNumber" placeholder="Location Number">
+                            <label>Location #</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="LocationNickname" placeholder="Nickname">
+                            <label>Nickname</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Service" placeholder="Service" required>
+
+                            <label>Service</label>
+                            <span asp-validation-for="Service" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Address" placeholder="Address" required>
+
+                            <label>Address<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="City" placeholder="City" required>
+
+                            <label>City<span class="text-danger">*</span></label>
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="State" placeholder="State" required>
+
+                            <label>State<span class="text-danger">*</span></label>
+                            <span asp-validation-for="State" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Second Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                           
+                           
+
+                            <input type="text" class="form-control" asp-for="Zip" placeholder="ZIP" required>
+
+                            <label>ZIP<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Zip" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" asp-for="PhoneNumber" placeholder="Phone">
+                            <label>Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                            <label>Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="ManagerName" placeholder="Manager">
+                            <label>Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="L1ManagerName" placeholder="L1 Manager">
+                            <label>L1 Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" asp-for="L1ManagerEmail" placeholder="L1 Email">
+                            <label>L1 Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" asp-for="L1ManagerPhone" placeholder="L1 Phone">
+                            <label>L1 Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="L2ManagerName" placeholder="L2 Manager">
+                            <label>L2 Manager</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" asp-for="L2ManagerEmail" placeholder="L2 Email">
+                            <label>L2 Email</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" class="form-control" asp-for="L2ManagerPhone" placeholder="L2 Phone">
+                            <label>L2 Phone</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" asp-for="AssetsVerified">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <label>Verified</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" asp-for="AssetCount" placeholder="# Assets">
+                            <label># Assets</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" asp-for="SqFt" placeholder="Sq Ft" required>
+
+                            <label>Sq Ft<span class="text-danger">*</span></label>
+                            <span asp-validation-for="SqFt" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Value" placeholder="Value">
+                            <label>Value</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" asp-for="Notes" style="height: 80px" placeholder="Notes"></textarea>
+                            <label>Notes</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="Verifier" placeholder="Verifier">
+                            <label>Verifier</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" asp-for="DateVerified" placeholder="Verified Date">
+                            <label>Verified Date</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Shows all validation errors *@
+           
+            
+
+            <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
+                <div>
+                    <a href="\Location\Location" class="btn btn-alt-dark">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+                <div>
+                    @* <button type="reset" class="btn btn-alt-secondary me-2">
+                        <i class="fa fa-sync-alt me-1"></i> Reset
+                    </button> *@
+                    <button type="submit" class="btn btn-alt-primary">
+                        <i class="fa fa-check me-1"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+</div>
+

@@ -5,6 +5,7 @@ namespace FC_Application.Models
 
     public class Location
     {
+        public int SrNo { get; set; } = 0;
         public string? SurveyorName { get; set; }
 
         [Required]
