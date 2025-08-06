@@ -103,7 +103,7 @@
                             <th>Notes</th>
                             <th>Verifier</th>
                             <th>Verified Date</th>
-                            <th class="d-none d-sm-table-cell">Access</th>
+                            @* <th class="d-none d-sm-table-cell">Access</th> *@
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -152,7 +152,7 @@
                                     <td>@loc.Notes</td>
                                     <td>@loc.Verifier</td>
                                     <td>@loc.DateVerified</td>
-                                    <td class="d-none d-sm-table-cell"><span class="badge bg-warning text-dark">Trial</span></td>
+                                   @*  <td class="d-none d-sm-table-cell"><span class="badge bg-warning text-dark">Trial</span></td> *@
                                     <td>
                                         <div class="btn-group">
                                             <a asp-action="LocationEdit" asp-route-SrNo="@loc.SrNo" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit">
