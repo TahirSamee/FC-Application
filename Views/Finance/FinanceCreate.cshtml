@@ -1,0 +1,127 @@
+﻿@model FC_Application.Models.Finance
+@{
+    ViewData["Title"] = "Finance Create";
+}
+
+<div class="content">
+    <form asp-action="FinanceCreate" asp-controller="Finance" method="post" class="needs-validation" novalidate>
+        <div class="block block-rounded shadow-sm border">
+            <div class="block-header block-header-default bg-primary text-white">
+                <h3 class="block-title">Create Finance Entry</h3>
+            </div>
+
+            <div class="block-content">
+                <div class="row g-3">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="SONumber" class="form-control" placeholder="SO Number" required />
+                            <label asp-for="SONumber">SO Number<span class="text-danger">*</span></label>
+                            <span asp-validation-for="SONumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Client" class="form-control" placeholder="Client" required />
+                            <label asp-for="Client">Client<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Client" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Customer" class="form-control" placeholder="Customer" required />
+                            <label asp-for="Customer">Customer<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Customer" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="DateReceived" type="date" class="form-control" placeholder="Date Received" required />
+                            <label asp-for="DateReceived">Date Received<span class="text-danger">*</span></label>
+                            <span asp-validation-for="DateReceived" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="DateDue" type="date" class="form-control" placeholder="Date Due" required />
+                            <label asp-for="DateDue">Date Due<span class="text-danger">*</span></label>
+                            <span asp-validation-for="DateDue" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="DateSubmitted" type="date" class="form-control" placeholder="Date Submitted" required />
+                            <label asp-for="DateSubmitted">Date Submitted<span class="text-danger">*</span></label>
+                            <span asp-validation-for="DateSubmitted" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="ExpirationDate" type="date" class="form-control" placeholder="Expiration Date" required />
+                            <label asp-for="ExpirationDate">Expiration Date<span class="text-danger">*</span></label>
+                            <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="POCName" class="form-control" placeholder="POC Name" required />
+                            <label asp-for="POCName">POC Name<span class="text-danger">*</span></label>
+                            <span asp-validation-for="POCName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="POCEmail" type="email" class="form-control" placeholder="POC Email" required />
+                            <label asp-for="POCEmail">POC Email<span class="text-danger">*</span></label>
+                            <span asp-validation-for="POCEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="POCPhone" type="tel" class="form-control" placeholder="POC Phone" required />
+                            <label asp-for="POCPhone">POC Phone<span class="text-danger">*</span></label>
+                            <span asp-validation-for="POCPhone" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select asp-for="Status" class="form-select" required>
+                                <option value="">-- Select Status --</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                                <option value="Submitted">Submitted</option>
+                            </select>
+                            <label asp-for="Status">Status<span class="text-danger">*</span></label>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="ServiceType" class="form-control" placeholder="Service Type" required />
+                            <label asp-for="ServiceType">Service Type<span class="text-danger">*</span></label>
+                            <span asp-validation-for="ServiceType" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="UnitQuantity" type="number" class="form-control" placeholder="Quantity" required />
+                            <label asp-for="UnitQuantity">Quantity<span class="text-danger">*</span></label>
+                            <span asp-validation-for="UnitQuantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="ProposalTotal" type="number" step="0.01" class="form-control" placeholder="Proposal Total" required />
+                            <label asp-for="ProposalTotal">Total<span class="text-danger">*</span></label>
+                            <span asp-validation-for="ProposalTotal" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
+                <div>
+                    <a href="\Finance\Finance" class="btn btn-alt-dark">
+                        <i class="fa fa-arrow-left me-1"></i> Back
+                    </a>
+                </div>
+                <div>
+                    <button type="reset" class="btn btn-alt-secondary me-2">
+                        <i class="fa fa-sync-alt me-1"></i> Reset
+                    </button>
+                    <button type="submit" class="btn btn-alt-primary">
+                        <i class="fa fa-check me-1"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success mt-3">@TempData["Success"]</div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

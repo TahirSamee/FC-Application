@@ -1,0 +1,145 @@
+﻿@model IEnumerable<Finance>
+
+@{
+    ViewData["Title"] = "Finance";
+    var page = ViewBag.Page ?? 1;
+    var totalPages = ViewBag.TotalPages ?? 1;
+    var pageSize = ViewBag.PageSize ?? 10;
+    var search = ViewBag.Search ?? "";
+}
+
+<style>
+    .pagination .page-link {
+        transition: 0.2s ease-in-out;
+        padding: 6px 12px;
+        box-shadow: none;
+    }
+
+        .pagination .page-link:hover {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+</style>
+
+<div class="content">
+    <div class="block block-rounded shadow-sm border">
+        <div class="block-header block-header-default bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="block-title mb-0">Finance</h3>
+            <a asp-controller="Finance" asp-action="FinanceCreate" class="btn btn-light btn-sm text-primary">
+                <i class="fa fa-plus me-1"></i> Create Finance
+            </a>
+        </div>
+
+        <div class="block-content p-3">
+            <form asp-action="Finance" method="get" class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <label class="mb-0 small fw-semibold text-muted">Show:</label>
+                    <select name="pageSize" class="form-select form-select-sm w-auto" onchange="this.form.submit()">
+                        <option value="10" selected="@((int)pageSize == 10)">10</option>
+                        <option value="20" selected="@((int)pageSize == 20)">20</option>
+                        <option value="50" selected="@((int)pageSize == 50)">50</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="search" name="search" class="form-control form-control-sm" value="@search" placeholder="Search..." style="width: 180px;" />
+                </div>
+            </form>
+
+            <div class="table-responsive table-responsive-sticky text-center p-0 m-0 rounded">
+                <table class="table table-sm table-hover align-middle table-bordered mb-0">
+                    <thead class="table-dark text-center text-nowrap sticky-top">
+                        <tr>
+                            <th>#</th>
+                            <th>SO Number</th>
+                            <th>Client</th>
+                            <th>Customer</th>
+                            <th>Date Received</th>
+                            <th>Date Due</th>
+                            <th>Date Submitted</th>
+                            <th>Expiration Date</th>
+                            <th>POC Name</th>
+                            <th>POC Email</th>
+                            <th>POC Phone</th>
+                            <th>Status</th>
+                            <th>Service Type</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center text-nowrap p-0 m-0 align-middle">
+                        @if (!Model.Any())
+                        {
+                            <tr><td colspan="16" class="text-center text-muted">No records found.</td></tr>
+                        }
+                        else
+                        {
+                            int rowNum = ((int)page - 1) * (int)pageSize;
+                            foreach (var f in Model)
+                            {
+                                <tr>
+                                    <th scope="row">@(++rowNum)</th>
+                                    <td>@f.SONumber</td>
+                                    <td>@f.Client</td>
+                                    <td>@f.Customer</td>
+                                    <td>@f.DateReceived</td>
+                                    <td>@f.DateDue</td>
+                                    <td>@f.DateSubmitted</td>
+                                    <td>@f.ExpirationDate</td>
+                                    <td>@f.POCName</td>
+                                    <td>@f.POCEmail</td>
+                                    <td>@f.POCPhone</td>
+                                    <td><span class="badge bg-info">@f.Status</span></td>
+                                    <td>@f.ServiceType</td>
+                                    <td>@f.UnitQuantity</td>
+                                    <td>@f.ProposalTotal</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a asp-action="FinanceEdit" asp-route-SrNo="@f.SrNo" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </a>
+                                            <a asp-action="FinanceDelete" asp-route-SrNo="@f.SrNo" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm justify-content-end mb-0">
+                    <li class="page-item @(page <= 1 ? "disabled" : "")">
+                        <a class="page-link shadow-sm" href="@Url.Action("Finance", new { search = search, page = page - 1, pageSize = pageSize })">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= totalPages; i++)
+                    {
+                        <li class="page-item @(i == page ? "active" : "")">
+                            <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
+                               href="@Url.Action("Finance", new { search = search, page = i, pageSize = pageSize })">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(page >= totalPages ? "disabled" : "")">
+                        <a class="page-link shadow-sm" href="@Url.Action("Finance", new { search = search, page = page + 1, pageSize = pageSize })">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

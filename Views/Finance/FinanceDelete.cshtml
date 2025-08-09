@@ -1,0 +1,44 @@
+﻿@model FC_Application.Models.Finance
+@{
+    ViewData["Title"] = "Finance Delete";
+}
+
+<div class="content">
+    <form asp-action="DeleteConfirmed" asp-controller="Finance" method="post">
+        <div class="block block-rounded shadow-sm border">
+            <div class="block-header block-header-default bg-primary text-white">
+                <h3 class="block-title">Delete Finance Entry</h3>
+            </div>
+
+            <input type="hidden" asp-for="SrNo" />
+
+            <div class="block-content">
+                <h4>Are you sure you want to delete this finance entry?</h4>
+
+                <ol class="mb-2">
+                    <li><strong>Sr No:</strong> @Model.SrNo</li>
+                    <li><strong>SO Number:</strong> @Model.SONumber</li>
+                    <li><strong>Client:</strong> @Model.Client</li>
+                    <li><strong>Customer:</strong> @Model.Customer</li>
+                    <li><strong>POC Name:</strong> @Model.POCName</li>
+                    <li><strong>Status:</strong> <span class="badge bg-info">@Model.Status</span></li>
+                    <li><strong>Proposal Total:</strong> @Model.ProposalTotal</li>
+                    <li><strong>Date Received:</strong> @Model.DateReceived</li>
+                </ol>
+            </div>
+
+            <div class="block-content block-content-full d-flex justify-content-between align-items-center bg-body-light border-top p-3">
+                <div>
+                    <a href="/Finance/Finance" class="btn btn-alt-dark">
+                        <i class="fa fa-arrow-left me-1"></i> Cancel
+                    </a>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-alt-danger">
+                        <i class="fa fa-trash me-1"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

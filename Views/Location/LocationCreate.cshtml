@@ -82,8 +82,12 @@
                             <label>Nickname</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" name="Service" placeholder="Service" required>
-
+                            <select class="form-select" name="Service" required>
+                                <option value="CPAEX Project Management">CPAEX Project Management</option>
+                                <option value="Equipment Validations">Equipment Validations</option>
+                                <option value="Facility Assessments">Facility Assessments</option>
+                                <option value="Fixed Asset Survey">Fixed Asset Survey</option>
+                            </select>
                             <label>Service</label>
                             <span asp-validation-for="Service" class="text-danger"></span>
                         </div>
