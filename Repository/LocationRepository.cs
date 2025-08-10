@@ -139,6 +139,22 @@ namespace FC_Application.Repository
                 return rows > 0;
             }
         }
+        public async Task<int> GetTotalLocationCountAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT COUNT(*) FROM Location";
+                return await connection.ExecuteScalarAsync<int>(sql);
+            }
+        }
+        public async Task<int> GetPendingLocationCountAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT COUNT(*) FROM Location WHERE Status = 'Pending Schedule'";
+                return await connection.ExecuteScalarAsync<int>(sql);
+            }
+        }
 
     }
 }

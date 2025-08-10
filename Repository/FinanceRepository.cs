@@ -112,5 +112,22 @@ namespace FC_Application.Repository
                 return rows > 0;
             }
         }
+        public async Task<int> GetTotalFinanceCountAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT COUNT(*) FROM Finance";
+                return await connection.ExecuteScalarAsync<int>(sql);
+            }
+        }
+        public async Task<int> GetPendingFinanceCountAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = "SELECT COUNT(*) FROM Finance WHERE Status = 'Pending'";
+                return await connection.ExecuteScalarAsync<int>(sql);
+            }
+        }
+        
     }
 }
