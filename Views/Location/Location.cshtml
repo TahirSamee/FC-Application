@@ -30,12 +30,28 @@
     <div class="block block-rounded shadow-sm border">
         <div class="block-header block-header-default bg-primary text-white d-flex justify-content-between align-items-center">
             <h3 class="block-title mb-0">Location</h3>
+           
+
             <a asp-controller="Location" asp-action="LocationCreate" class="btn btn-light btn-sm text-primary">
                 <i class="fa fa-plus me-1"></i> Create Location
             </a>
+
+
         </div>
 
         <div class="block-content p-3">
+            <form asp-action="ImportExcel" asp-controller="Location" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".xls,.xlsx" class="p-1 w-50 mb-2" style="border: 1px solid; border-color: #0284c7;border-radius:5px" />
+                <button type="submit" class="btn btn-sm btn-primary">Import Excel</button>
+            </form>
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">@TempData["Error"]</div>
+            } 
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">@TempData["Success"]</div>
+            }
             <form asp-action="Location" method="get" class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
                 <div class="d-flex align-items-center gap-2">
                     <label class="mb-0 small fw-semibold text-muted">Show:</label>
@@ -223,28 +239,44 @@
             </div>
         </div>
         <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
-        <nav aria-label="Page navigation">
-    <ul class="pagination pagination-sm justify-content-end mb-0">
-        <li class="page-item @(page <= 1 ? "disabled" : "")">
-                    <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page - 1, pageSize = pageSize })">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        </li>
-        @for (int i = 1; i <= totalPages; i++)
-        {
-            <li class="page-item @(i == page ? "active" : "")">
-                <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
-                           href="@Url.Action("Location", new { search = search, page = i, pageSize = pageSize })">@i</a>
-            </li>
-        }
-        <li class="page-item @(page >= totalPages ? "disabled" : "")">
-                    <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page + 1, pageSize = pageSize })">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </li>
-    </ul>
-</nav>
+            <nav aria-label="Page navigation">
+                <ul class="pagination pagination-sm justify-content-end mb-0">
+                    <!-- Previous Button -->
+                    <li class="page-item @(page <= 1 ? "disabled" : "")">
+                        <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page - 1, pageSize = pageSize })">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+
+                    @{
+                        int startPage = Math.Max(1, page - 1);
+                        int endPage = Math.Min(totalPages, startPage + 2);
+
+                        // Adjust start if near the end
+                        if (endPage - startPage < 2)
+                        {
+                            startPage = Math.Max(1, endPage - 2);
+                        }
+
+                        for (int i = startPage; i <= endPage; i++)
+                        {
+                            <li class="page-item @(i == page ? "active" : "")">
+                                <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
+                                   href="@Url.Action("Location", new { search = search, page = i, pageSize = pageSize })">@i</a>
+                            </li>
+                        }
+                    }
+
+                    <!-- Next Button -->
+                    <li class="page-item @(page >= totalPages ? "disabled" : "")">
+                        <a class="page-link shadow-sm" href="@Url.Action("Location", new { search = search, page = page + 1, pageSize = pageSize })">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
+
 
         <!-- Pagination -->
         @* <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">

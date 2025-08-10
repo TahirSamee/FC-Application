@@ -121,18 +121,33 @@
         <div class="block-content block-content-full block-content-sm bg-white fs-sm border-top">
             <nav aria-label="Page navigation">
                 <ul class="pagination pagination-sm justify-content-end mb-0">
+                    <!-- Previous Button -->
                     <li class="page-item @(page <= 1 ? "disabled" : "")">
                         <a class="page-link shadow-sm" href="@Url.Action("Finance", new { search = search, page = page - 1, pageSize = pageSize })">
                             <i class="fa fa-angle-left"></i>
                         </a>
                     </li>
-                    @for (int i = 1; i <= totalPages; i++)
-                    {
-                        <li class="page-item @(i == page ? "active" : "")">
-                            <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
-                               href="@Url.Action("Finance", new { search = search, page = i, pageSize = pageSize })">@i</a>
-                        </li>
+
+                    @{
+                        int startPage = Math.Max(1, page - 1);
+                        int endPage = Math.Min(totalPages, startPage + 2);
+
+                        // Adjust start if we're near the end
+                        if (endPage - startPage < 2)
+                        {
+                            startPage = Math.Max(1, endPage - 2);
+                        }
+
+                        for (int i = startPage; i <= endPage; i++)
+                        {
+                            <li class="page-item @(i == page ? "active" : "")">
+                                <a class="page-link @(i == page ? "bg-primary text-white border-0" : "") shadow-sm"
+                                   href="@Url.Action("Finance", new { search = search, page = i, pageSize = pageSize })">@i</a>
+                            </li>
+                        }
                     }
+
+                    <!-- Next Button -->
                     <li class="page-item @(page >= totalPages ? "disabled" : "")">
                         <a class="page-link shadow-sm" href="@Url.Action("Finance", new { search = search, page = page + 1, pageSize = pageSize })">
                             <i class="fa fa-angle-right"></i>
@@ -141,5 +156,6 @@
                 </ul>
             </nav>
         </div>
+
     </div>
 </div>
