@@ -7,12 +7,12 @@
 <!-- Page Content -->
 <div class="content">
     <div class="row">
-        <h3>Total Invoices</h3>
+        
         <!-- Row #1 -->
         <div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-rounded text-center" href="javascript:void(0)">
+            <a class="block block-rounded text-center" href="/Location/Location">
                 <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-dusk">
-                    <div class="ribbon-box">@Model.TotalLocations</div>
+                    @* <div class="ribbon-box">@Model.TotalLocations</div> *@
                     <p class="mt-2 mb-3">
                         <i class="si si-map fa-2x text-white-75"></i>
                     </p>
@@ -22,9 +22,9 @@
         </div>
        
         <div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-rounded text-center" href="javascript:void(0)">
+            <a class="block block-rounded text-center" href="/Finance/Finance">
                 <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-sea">
-                    <div class="ribbon-box">@Model.TotalFinances</div>
+                  @*   <div class="ribbon-box">@Model.TotalFinances</div> *@
                     <p class="mt-2 mb-3">
                         <i class="fa fa-file-invoice-dollar fa-2x text-white-75"></i>
                     </p>
@@ -33,7 +33,7 @@
             </a>
         </div>
         <div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-rounded text-center" href="/Location/Location">
+            <a class="block block-rounded text-center" href="/Location/LocationCreate">
                 <div class="block-content bg-gd-primary">
                     <p class="mt-2 mb-3">
                         <i class="fa fa-map-marker-alt fa-2x text-white-75"></i>
@@ -43,7 +43,7 @@
             </a>
         </div>
         <div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-rounded text-center" href="/Finance/Finance">
+            <a class="block block-rounded text-center" href="/Finance/FinanceCreate">
                 <div class="block-content bg-gd-primary">
                     <p class="mt-2 mb-3">
                         <i class="fa fa-dollar fa-2x text-white-75"></i>
@@ -62,7 +62,7 @@
                 </div>
             </a>
         </div>
-        @* <div class="col-6 col-md-4 col-xl-2">
+        <div class="col-6 col-md-4 col-xl-2">
             <a class="block block-rounded text-center" href="javascript:void(0)">
                 <div class="block-content bg-gd-emerald">
                     <p class="mt-2 mb-3">
@@ -71,8 +71,8 @@
                     <p class="fw-semibold text-white">Statistics</p>
                 </div>
             </a>
-        </div> *@
-        <div class="col-6 col-md-4 col-xl-2">
+        </div>
+       @*  <div class="col-6 col-md-4 col-xl-2">
             <a class="block block-rounded text-center" href="javascript:void(0)">
                 <div class="block-content bg-gd-corporate">
                     <p class="mt-2 mb-3">
@@ -81,10 +81,52 @@
                     <p class="fw-semibold text-white">Settings</p>
                 </div>
             </a>
-        </div>
+        </div> *@
         <!-- END Row #1 -->
     </div>
     
+    <div class="row">
+        <h3>Total Invoices</h3>
+        <!-- Row #3 -->
+        <div class="col-md-6">
+            <a class="block block-rounded" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <i class="si si-map fa-2x text-body-bg-dark"></i>
+                    <div class="row pt-2 pb-4 text-center">
+                        <div class="col-12 ">
+                            <div class="fs-3 fw-semibold">@Model.TotalFinances</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Locations</div>
+                        </div>
+                        @* <div class="col-6">
+                            <div class="fs-3 fw-semibold">870</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Subscriptions</div>
+                        </div> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <a class="block block-rounded" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="text-end">
+                        <i class="fa fa-file-invoice-dollar fa-2x text-body-bg-dark"></i>
+                    </div>
+                    <div class="row pt-2 pb-4 text-center">
+                        <div class="col-12">
+                            <div class="fs-3 fw-semibold">@Model.TotalFinances</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Finances</div>
+                        </div>
+                        @*  <div class="col-6">
+                            <div class="fs-3 fw-semibold">$4,490</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Last Week</div>
+                        </div> *@
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- END Row #3 -->
+    </div>
+
     <div class="row">
         <h3>Pending Invoices</h3>
         <!-- Row #3 -->
@@ -95,7 +137,7 @@
                     <div class="row pt-2 pb-4 text-center">
                         <div class="col-12 ">
                             <div class="fs-3 fw-semibold">@Model.PendingLocations</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Pending Locations</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Locations</div>
                         </div>
                         @* <div class="col-6">
                             <div class="fs-3 fw-semibold">870</div>
@@ -114,7 +156,7 @@
                     <div class="row pt-2 pb-4 text-center">
                         <div class="col-12">
                             <div class="fs-3 fw-semibold">@Model.PendingFinances</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Pending Finances</div>
+                            <div class="fs-sm fw-semibold text-uppercase text-muted">Finances</div>
                         </div>
                        @*  <div class="col-6">
                             <div class="fs-3 fw-semibold">$4,490</div>
