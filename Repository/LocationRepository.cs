@@ -24,7 +24,7 @@ namespace FC_Application.Repository
                     LocationNickname, Service, Address, City, State, Zip, PhoneNumber, Email,
                     ManagerName, L1ManagerName, L1ManagerEmail, L1ManagerPhone,
                     L2ManagerName, L2ManagerEmail, L2ManagerPhone,
-                    AssetsVerified, AssetCount, SqFt, Value, Notes, Verifier, DateVerified
+                    AssetsVerified, AssetCount, SqFt, Value, Notes, Verifier, DateVerified,Lat,Lng
                 )
                 VALUES (
                     @SurveyorName, @LocationID, @SalesOrderID, @ClientLocationIdentifier, @Status,
@@ -32,7 +32,7 @@ namespace FC_Application.Repository
                     @LocationNickname, @Service, @Address, @City, @State, @Zip, @PhoneNumber, @Email,
                     @ManagerName, @L1ManagerName, @L1ManagerEmail, @L1ManagerPhone,
                     @L2ManagerName, @L2ManagerEmail, @L2ManagerPhone,
-                    @AssetsVerified, @AssetCount, @SqFt, @Value, @Notes, @Verifier, @DateVerified
+                    @AssetsVerified, @AssetCount, @SqFt, @Value, @Notes, @Verifier, @DateVerified,@Lat,@Lng
                 );
             ";
 
@@ -121,7 +121,9 @@ namespace FC_Application.Repository
             Value = @Value,
             Notes = @Notes,
             Verifier = @Verifier,
-            DateVerified = @DateVerified
+            DateVerified = @DateVerified,
+            Lat=@Lat,
+            Lng=@Lng
         WHERE SrNo = @SrNo;
         ";
 

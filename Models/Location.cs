@@ -38,6 +38,9 @@ namespace FC_Application.Models
 
         [Required]
         public string Address { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
+
 
         [Required]
         public string City { get; set; }

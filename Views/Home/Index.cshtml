@@ -299,5 +299,35 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+        <div id="usaMap" style="height: 500px; width: 100%;"></div>
+        </div>
+    </div>
 </div>
 <!-- END Page Content -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+<script>
+    var map = L.map('usaMap').setView([37.8, -96], 4);
+    debugger
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18
+    }).addTo(map);
+
+    var locations = @Html.Raw(ViewBag.PendingLocations);
+
+    // Add pins
+    locations.forEach(function (loc) {
+        L.marker([loc.lat, loc.lng])
+            .addTo(map)
+            .bindPopup(`<b>${loc.LocationID}</b><br>Status: ${loc.Status}<br>Address: ${loc.Address}`);
+    });
+
+    // Add heatmap layer
+    var heatPoints = locations.map(l => [l.lat, l.lng, 1]);
+    L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
+</script>

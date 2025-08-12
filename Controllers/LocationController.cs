@@ -1,6 +1,8 @@
-﻿using FC_Application.Models;
+﻿using ExcelDataReader.Log;
+using FC_Application.Models;
 using FC_Application.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace FC_Application.Controllers
 {
@@ -36,6 +38,12 @@ namespace FC_Application.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(location.Address))
+                {
+                    var coords = await GeocodeAsync(location.Address);
+                    location.Lat= coords.lat;
+                    location.Lng=coords.lng;
+                }
                 var result = await _repository.AddLocationAsync(location);
                 if (result)
                 {
@@ -50,7 +58,30 @@ namespace FC_Application.Controllers
 
             return View(location);
         }
+        public async Task<(double lat, double lng)> GeocodeAsync(string address)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                // Required by Nominatim usage policy
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "MyProjectName/1.0 (myemail@example.com)");
 
+                var url = $"https://nominatim.openstreetmap.org/search?format=json&q={Uri.EscapeDataString(address)}";
+                var response = await httpClient.GetAsync(url);
+
+                response.EnsureSuccessStatusCode(); // will throw if not 200 OK
+
+                var json = await response.Content.ReadAsStringAsync();
+                var results = JArray.Parse(json);
+
+                if (results.Count > 0)
+                {
+                    var lat = double.Parse(results[0]["lat"].ToString());
+                    var lng = double.Parse(results[0]["lon"].ToString());
+                    return (lat, lng);
+                }
+            }
+            return (0, 0);
+        }
 
         // GET: Edit
         public async Task<IActionResult> LocationEdit(int SrNo)
@@ -71,6 +102,12 @@ namespace FC_Application.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!string.IsNullOrEmpty(location.Address))
+                {
+                    var coords = await GeocodeAsync(location.Address);
+                    location.Lat = coords.lat;
+                    location.Lng = coords.lng;
+                }
                 var result = await _repository.UpdateLocationAsync(location);
                 if (result)
                 {

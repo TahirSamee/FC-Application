@@ -1,6 +1,8 @@
 using FC_Application.Models;
 using FC_Application.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 
 namespace FC_Application.Controllers
@@ -25,16 +27,32 @@ namespace FC_Application.Controllers
 
             var model = new DashboardViewModel
             {
-                TotalLocations = await _locationRepo.GetTotalLocationCountAsync(),
-                PendingLocations = await _locationRepo.GetPendingLocationCountAsync(),
-                TotalFinances = await _financeRepo.GetTotalFinanceCountAsync(),
-                PendingFinances = await _financeRepo.GetPendingFinanceCountAsync(),
-                Locations= locations,
+                TotalLocations = 0,//await _locationRepo.GetTotalLocationCountAsync(),
+                PendingLocations = 0, //await _locationRepo.GetPendingLocationCountAsync(),
+                TotalFinances = 0, //await _financeRepo.GetTotalFinanceCountAsync(),
+                PendingFinances = 0, //await _financeRepo.GetPendingFinanceCountAsync(),
+                Locations = locations,
                 Finances = finances,
             };
 
+            var geoLocations = new List<object>();
+            foreach (var loc in locations)
+            {
+                if (loc.Address != null)
+                {
+                    
+                    geoLocations.Add(new { loc.LocationID, loc.Status, lat = loc.Lat, lng = loc.Lng, Address = loc.Address });
+                }
+
+            }
+
+            ViewBag.PendingLocations = JsonConvert.SerializeObject(geoLocations);
             return View(model);
         }
+
+
+        
+
 
         public IActionResult Privacy()
         {
