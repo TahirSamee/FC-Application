@@ -132,7 +132,7 @@ namespace FC_Application.Repository
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var sql = @" SELECT top 10 * FROM Finance WHERE Status = 'Pending'";
+                var sql = @" SELECT  * FROM Finance WHERE Status = 'Pending'";
 
                 return await connection.QueryAsync<Finance>(sql);
             }

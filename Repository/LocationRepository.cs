@@ -160,7 +160,7 @@ namespace FC_Application.Repository
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var sql = @" SELECT top 10 * FROM Location WHERE Status = 'Pending Schedule'";
+                var sql = @" SELECT  * FROM Location WHERE Status = 'Pending Schedule'";
 
                 return await connection.QueryAsync<Location>(sql);
             }

@@ -4,15 +4,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!-- Page Content -->
+
 <div class="content">
-    <div class="row">
-        
-        <!-- Row #1 -->
+    @* <div class="row">
+
+
         <div class="col-6 col-md-4 col-xl-2">
             <a class="block block-rounded text-center" href="/Location/Location">
                 <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-dusk">
-                    @* <div class="ribbon-box">@Model.TotalLocations</div> *@
+
                     <p class="mt-2 mb-3">
                         <i class="si si-map fa-2x text-white-75"></i>
                     </p>
@@ -20,11 +20,11 @@
                 </div>
             </a>
         </div>
-       
+
         <div class="col-6 col-md-4 col-xl-2">
             <a class="block block-rounded text-center" href="/Finance/Finance">
                 <div class="block-content ribbon ribbon-bookmark ribbon-glass ribbon-left bg-gd-sea">
-                  @*   <div class="ribbon-box">@Model.TotalFinances</div> *@
+
                     <p class="mt-2 mb-3">
                         <i class="fa fa-file-invoice-dollar fa-2x text-white-75"></i>
                     </p>
@@ -72,22 +72,12 @@
                 </div>
             </a>
         </div>
-       @*  <div class="col-6 col-md-4 col-xl-2">
-            <a class="block block-rounded text-center" href="javascript:void(0)">
-                <div class="block-content bg-gd-corporate">
-                    <p class="mt-2 mb-3">
-                        <i class="si si-settings fa-2x text-white-75"></i>
-                    </p>
-                    <p class="fw-semibold text-white">Settings</p>
-                </div>
-            </a>
-        </div> *@
-        <!-- END Row #1 -->
+
     </div>
-    
+
     <div class="row">
         <h3>Total Invoices</h3>
-        <!-- Row #3 -->
+
         <div class="col-md-6">
             <a class="block block-rounded" href="javascript:void(0)">
                 <div class="block-content block-content-full">
@@ -97,10 +87,7 @@
                             <div class="fs-3 fw-semibold">@Model.TotalFinances</div>
                             <div class="fs-sm fw-semibold text-uppercase text-muted">Locations</div>
                         </div>
-                        @* <div class="col-6">
-                            <div class="fs-3 fw-semibold">870</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Subscriptions</div>
-                        </div> *@
+
                     </div>
                 </div>
             </a>
@@ -116,20 +103,17 @@
                             <div class="fs-3 fw-semibold">@Model.TotalFinances</div>
                             <div class="fs-sm fw-semibold text-uppercase text-muted">Finances</div>
                         </div>
-                        @*  <div class="col-6">
-                            <div class="fs-3 fw-semibold">$4,490</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Last Week</div>
-                        </div> *@
+
                     </div>
                 </div>
             </a>
         </div>
-        <!-- END Row #3 -->
+
     </div>
 
     <div class="row">
         <h3>Pending Invoices</h3>
-        <!-- Row #3 -->
+
         <div class="col-md-6">
             <a class="block block-rounded" href="javascript:void(0)">
                 <div class="block-content block-content-full">
@@ -139,10 +123,7 @@
                             <div class="fs-3 fw-semibold">@Model.PendingLocations</div>
                             <div class="fs-sm fw-semibold text-uppercase text-muted">Locations</div>
                         </div>
-                        @* <div class="col-6">
-                            <div class="fs-3 fw-semibold">870</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Subscriptions</div>
-                        </div> *@
+
                     </div>
                 </div>
             </a>
@@ -158,148 +139,159 @@
                             <div class="fs-3 fw-semibold">@Model.PendingFinances</div>
                             <div class="fs-sm fw-semibold text-uppercase text-muted">Finances</div>
                         </div>
-                       @*  <div class="col-6">
-                            <div class="fs-3 fw-semibold">$4,490</div>
-                            <div class="fs-sm fw-semibold text-uppercase text-muted">Last Week</div>
-                        </div> *@
+
                     </div>
                 </div>
             </a>
         </div>
-        <!-- END Row #3 -->
-    </div>
-   
+
+    </div> *@
+
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="block block-rounded block-bordered">
                 <div class="block-header block-header-default border-bottom bg-gd-dusk">
-                    <h3 class="block-title text-white">Top 10 Pending Location Invoices</h3>
-                    
+                    <h3 class="block-title text-white">Pending Work Orders</h3>
+
                 </div>
-                <div class="block-content">
+                <div class="block-content p-1">
                     <div class="table-responsive">
-                    <table class="table table-sm table-borderless table-striped">
+                        <table class="table table-sm table-borderless table-striped">
                             <thead class="table-dark text-nowrap">
-                            <tr>
-                                <th>Location ID</th>
-                                <th>Sales Order ID</th>
-                                <th>Client</th>
-                                <th>Brand Name</th>
-                                <th>Service</th>
-                                <th>Address</th>
-                                <th>City</th>
-                                <th>State</th>
-                                <th>SqFt</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Locations)
-                            {
                                 <tr>
-                                    <td>
-                                            <a class="fw-semibold" asp-controller="Location" asp-action="LocationEdit" asp-route-SrNo="@item.SrNo">@item.LocationID</a>
-                                    </td>
-                                    <td>
-                                        <span>@item.SalesOrderID</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.Client</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.BrandName</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.Service</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.Address</span>
-                                    </td>
-                                        <td>
-                                            <span>@item.City</span>
-                                        </td>
-                                        <td>
-                                            <span>@item.State</span>
-                                        </td>
-                                    <td>
-                                        <span>@item.SqFt</span>
-                                    </td>
+                                    <th>Location ID</th>
+                                    <th>Sales Order ID</th>
+                                    <th>Client</th>
+                                    <th>Brand Name</th>
+                                    <th>Service</th>
+                                    <th>Address</th>
+                                    <th>State</th>
                                 </tr>
-                            }
-                            
-                            <tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Locations.Count()>0)
+                                {
+                                    @foreach (var item in Model.Locations)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a class="fw-semibold" asp-controller="Location" asp-action="LocationEdit" asp-route-SrNo="@item.SrNo">@item.LocationID</a>
+                                            </td>
+                                            <td>
+                                                <span>@item.SalesOrderID</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.Client</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.BrandName</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.Service</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.Address</span>
+                                            </td>
+                                           
+                                            <td>
+                                                <span>@item.State</span>
+                                            </td>
+                                            
+                                        </tr>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="5" class="text-center text-muted">No pending work orders</td>
+                                    </tr>
+                                }
+
+                                @* <tr>
                                 <td colspan="7" class="text-center">
                                     <a class="fw-semibold" href="/Location/Location">Show More</a>
                                 </td>
-                                
-                            </tr>
-                        </tbody>
-                    </table>
+
+                            </tr> *@
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="block block-rounded block-bordered">
                 <div class="block-header block-header-default border-bottom bg-gd-dusk">
-                    <h3 class="block-title text-white">Top 10 Pending Finance Invoices</h3>
-                 
-                </div>
-                <div class="block-content">
-                    <div class="table-responsive">
-                    <table class="table table-sm table-borderless table-striped">
-                            <thead class="table-dark text-nowrap">
-                            <tr>
-                                <th>SO Number</th>
-                                <th>Client</th>
-                                <th>Customer</th>
-                                <th>Date Received</th>
-                                <th>POC Email</th>
-                                <th>Service Type</th>
-                                <th>POC Name</th>
-                                <th>Unit Quantity</th>
-                                <th>Proposal Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Finances)
-                            {
-                                <tr>
-                                    <td>
-                                            <a class="fw-semibold" asp-controller="Finance" asp-action="FinanceEdit" asp-route-SrNo="@item.SrNo">@item.SONumber</a>
-                                    </td>
-                                    <td>
-                                        <span>@item.Client</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.Customer</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.DateReceived</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.POCEmail</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.ServiceType</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.POCName</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.UnitQuantity</span>
-                                    </td>
-                                    <td>
-                                        <span>@item.ProposalTotal</span>
-                                    </td>
-                                </tr>
-                            }
+                    <h3 class="block-title text-white">Pending Invoices</h3>
 
-                            <tr>
+                </div>
+                <div class="block-content p-1">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-borderless table-striped">
+                            <thead class="table-dark text-nowrap">
+                                <tr>
+                                    <th>SO Number</th>
+                                    <th>Client</th>
+                                    <th>Customer</th>
+                                    <th>Date Received</th>
+                                    <th>POC Email</th>
+                                    <th>Service Type</th>
+                                    <th>POC Name</th>
+                                    <th>Unit Quantity</th>
+                                    <th>Proposal Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Finances.Count()>0)
+                                {
+                                    @foreach (var item in Model.Finances)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a class="fw-semibold" asp-controller="Finance" asp-action="FinanceEdit" asp-route-SrNo="@item.SrNo">@item.SONumber</a>
+                                            </td>
+                                            <td>
+                                                <span>@item.Client</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.Customer</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.DateReceived</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.POCEmail</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.ServiceType</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.POCName</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.UnitQuantity</span>
+                                            </td>
+                                            <td>
+                                                <span>@item.ProposalTotal</span>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="9" class="text-center text-muted">No pending invoices</td>
+                                    </tr>
+                                }
+
+                            @* <tr>
                                 <td colspan="9" class="text-center">
                                         <a class="fw-semibold" href="/Finance/Finance">Show More</a>
                                 </td>
 
-                            </tr>
+                            </tr> *@
                         </tbody>
                     </table>
                     </div>
