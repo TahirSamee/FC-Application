@@ -6,6 +6,9 @@
         public int PendingLocations { get; set; }
         public int TotalFinances { get; set; }
         public int PendingFinances { get; set; }
+
+        public IEnumerable<Location> Locations { get; set; }
+        public IEnumerable<Finance> Finances { get; set; }
     }
 
 }

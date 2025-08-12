@@ -128,6 +128,14 @@ namespace FC_Application.Repository
                 return await connection.ExecuteScalarAsync<int>(sql);
             }
         }
-        
+        public async Task<IEnumerable<Finance>> GetPendingFinanceAsync()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var sql = @" SELECT top 10 * FROM Finance WHERE Status = 'Pending'";
+
+                return await connection.QueryAsync<Finance>(sql);
+            }
+        }
     }
 }

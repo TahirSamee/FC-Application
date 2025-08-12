@@ -20,12 +20,17 @@ namespace FC_Application.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var locations = await _locationRepo.GetPendingLocationsAsync();
+            var finances = await _financeRepo.GetPendingFinanceAsync();
+
             var model = new DashboardViewModel
             {
                 TotalLocations = await _locationRepo.GetTotalLocationCountAsync(),
                 PendingLocations = await _locationRepo.GetPendingLocationCountAsync(),
                 TotalFinances = await _financeRepo.GetTotalFinanceCountAsync(),
-                PendingFinances = await _financeRepo.GetPendingFinanceCountAsync()
+                PendingFinances = await _financeRepo.GetPendingFinanceCountAsync(),
+                Locations= locations,
+                Finances = finances,
             };
 
             return View(model);
