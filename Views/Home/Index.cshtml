@@ -310,24 +310,108 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
-
 <script>
     var map = L.map('usaMap').setView([37.8, -96], 4);
-    debugger
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 18
     }).addTo(map);
 
     var locations = @Html.Raw(ViewBag.PendingLocations);
+    var heatPoints = [];
+    var bounds = L.latLngBounds([]);
 
-    // Add pins
-    locations.forEach(function (loc) {
-        L.marker([loc.lat, loc.lng])
-            .addTo(map)
-            .bindPopup(`<b>${loc.LocationID}</b><br>Status: ${loc.Status}<br>Address: ${loc.Address}`);
-    });
+            async function geocodeAddressesSequentially(locations) {
+        for (const loc of locations) {
+            try {
+                // Build combined free-text address
+                let fullAddress = `${loc.address}, ${loc.city}, ${loc.state}, USA`;
 
-    // Add heatmap layer
-    var heatPoints = locations.map(l => [l.lat, l.lng, 1]);
-    L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
+                const response = await fetch(
+                    `https://photon.komoot.io/api/?q=${encodeURIComponent(fullAddress)}`
+                );
+                const data = await response.json();
+                debugger
+                if (data.features && data.features.length > 0) {
+                    let lat = data.features[0].geometry.coordinates[1]; // Y = lat
+                    let lon = data.features[0].geometry.coordinates[0]; // X = lon
+
+                    // Add marker
+                    L.marker([lat, lon])
+                        .addTo(map)
+                        .bindPopup(
+                            `<b>${loc.locationid}</b><br>Status: ${loc.status}<br>` +
+                            `Address: ${fullAddress}`
+                        );
+
+                    // Add to heatmap
+                    heatPoints.push([lat, lon, 1]);
+
+                    // Extend bounds
+                    bounds.extend([lat, lon]);
+                }
+            } catch (err) {
+                console.error("Geocoding error:", err);
+            }
+
+            // Photon doesn't have strict rate limits like Nominatim,
+            // but let's still delay slightly to be nice to the server
+            await new Promise(r => setTimeout(r, 300));
+        }
+
+        // Add heat layer
+        if (heatPoints.length > 0) {
+            L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
+            map.fitBounds(bounds);
+        }
+    }
+
+
+    // async function geocodeAddressesSequentially(locations) {
+    //     for (const loc of locations) {
+    //         // If city/state/zip exist, append them
+    //         let fullAddress = loc.address;
+           
+
+    //         try {
+    //             const response = await fetch(
+    //                 `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullAddress)}`,
+    //                 { headers: { 'User-Agent': 'YourAppName/1.0 (your@email.com)' } }
+    //             );
+    //             const data = await response.json();
+
+    //             if (data.length > 0) {
+    //                 let lat = parseFloat(data[0].lat);
+    //                 let lon = parseFloat(data[0].lon);
+
+    //                 // Add marker
+    //                 L.marker([lat, lon])
+    //                     .addTo(map)
+    //                     .bindPopup(`<b>${loc.locationid}</b><br>Status: ${loc.status}<br>Address: ${fullAddress}`);
+
+    //                 // Add to heatmap
+    //                 heatPoints.push([lat, lon, 1]);
+
+    //                 // Extend bounds so we can fit map later
+    //                 bounds.extend([lat, lon]);
+    //             }
+    //         } catch (err) {
+    //             console.error("Geocoding error:", err);
+    //         }
+
+    //         // Wait 1.1s to respect Nominatim rate limits
+    //         await new Promise(r => setTimeout(r, 1100));
+    //     }
+
+    //     // Add heat layer
+    //     if (heatPoints.length > 0) {
+    //         L.heatLayer(heatPoints, { radius: 25 }).addTo(map);
+    //         map.fitBounds(bounds); // zoom to markers
+    //     }
+    // }
+
+    geocodeAddressesSequentially(locations);
 </script>
+
+
+

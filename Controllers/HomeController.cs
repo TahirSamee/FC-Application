@@ -41,7 +41,7 @@ namespace FC_Application.Controllers
                 if (loc.Address != null)
                 {
                     
-                    geoLocations.Add(new { loc.LocationID, loc.Status, lat = loc.Lat, lng = loc.Lng, Address = loc.Address });
+                    geoLocations.Add(new { locationid =loc.LocationID,status= loc.Status, address = loc.Address, city=loc.City, state=loc.State, zip=loc.Zip });
                 }
 
             }

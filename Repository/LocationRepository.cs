@@ -24,7 +24,7 @@ namespace FC_Application.Repository
                     LocationNickname, Service, Address, City, State, Zip, PhoneNumber, Email,
                     ManagerName, L1ManagerName, L1ManagerEmail, L1ManagerPhone,
                     L2ManagerName, L2ManagerEmail, L2ManagerPhone,
-                    AssetsVerified, AssetCount, SqFt, Value, Notes, Verifier, DateVerified,Lat,Lng
+                    AssetsVerified, AssetCount, SqFt, Value, Notes, Verifier, DateVerified
                 )
                 VALUES (
                     @SurveyorName, @LocationID, @SalesOrderID, @ClientLocationIdentifier, @Status,
@@ -32,7 +32,7 @@ namespace FC_Application.Repository
                     @LocationNickname, @Service, @Address, @City, @State, @Zip, @PhoneNumber, @Email,
                     @ManagerName, @L1ManagerName, @L1ManagerEmail, @L1ManagerPhone,
                     @L2ManagerName, @L2ManagerEmail, @L2ManagerPhone,
-                    @AssetsVerified, @AssetCount, @SqFt, @Value, @Notes, @Verifier, @DateVerified,@Lat,@Lng
+                    @AssetsVerified, @AssetCount, @SqFt, @Value, @Notes, @Verifier, @DateVerified
                 );
             ";
 
@@ -121,9 +121,7 @@ namespace FC_Application.Repository
             Value = @Value,
             Notes = @Notes,
             Verifier = @Verifier,
-            DateVerified = @DateVerified,
-            Lat=@Lat,
-            Lng=@Lng
+            DateVerified = @DateVerified
         WHERE SrNo = @SrNo;
         ";
 
@@ -162,7 +160,7 @@ namespace FC_Application.Repository
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                var sql = @" SELECT  * FROM Location WHERE Status = 'Pending Schedule'";
+                var sql = @" SELECT top 10 * FROM Location WHERE Status = 'Pending Schedule'";
 
                 return await connection.QueryAsync<Location>(sql);
             }
