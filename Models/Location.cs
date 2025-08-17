@@ -60,8 +60,8 @@ namespace FC_Application.Models
         public string? AssetsVerified { get; set; }
         public string? AssetCount { get; set; }
 
-        [Required]
-        public string SqFt { get; set; }
+       // [Required]
+        public string? SqFt { get; set; }
 
         public string? Value { get; set; }
         public string? Notes { get; set; }

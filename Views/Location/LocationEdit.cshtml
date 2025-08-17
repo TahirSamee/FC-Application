@@ -21,13 +21,13 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" asp-for="LocationID" placeholder="Location ID" required>
-                            <label>Location ID</label>
+                            <label>Location ID<span class="text-danger">*</span></label>
                             <span asp-validation-for="LocationID" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" asp-for="SalesOrderID" placeholder="Order ID" required>
 
-                            <label>Order ID</label>
+                            <label>Order ID<span class="text-danger">*</span></label>
                             <span asp-validation-for="SalesOrderID" class="text-danger"></span>
                         </div>
                         <div class="form-floating mb-3">
@@ -172,9 +172,9 @@
                             <label># Assets</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="number" class="form-control" asp-for="SqFt" placeholder="Sq Ft" required>
+                            <input type="number" class="form-control" asp-for="SqFt" placeholder="Sq Ft" >
 
-                            <label>Sq Ft<span class="text-danger">*</span></label>
+                            <label>Sq Ft</label>
                             <span asp-validation-for="SqFt" class="text-danger"></span>
 
                         </div>

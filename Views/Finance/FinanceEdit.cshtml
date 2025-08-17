@@ -81,7 +81,6 @@
 
                         <div class="form-floating mb-3">
                             <select asp-for="Status" class="form-select" required>
-                                <option value="">-- Select Status --</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
@@ -92,9 +91,17 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input asp-for="ServiceType" class="form-control" placeholder="Service Type" required />
-                            <label asp-for="ServiceType">Service Type<span class="text-danger">*</span></label>
+                            <select class="form-select" asp-for="ServiceType" name="ServiceType" required>
+                                <option value="CPAEX Project Management">CPAEX Project Management</option>
+                                <option value="Equipment Validations">Equipment Validations</option>
+                                <option value="Facility Assessments">Facility Assessments</option>
+                                <option value="Fixed Asset Survey">Fixed Asset Survey</option>
+                            </select>
+                            <label>Service Type<span class="text-danger">*</span></label>
                             <span asp-validation-for="ServiceType" class="text-danger"></span>
+                            @* <input asp-for="ServiceType" class="form-control" placeholder="Service Type" required />
+                            <label asp-for="ServiceType">Service Type<span class="text-danger">*</span></label>
+                            <span asp-validation-for="ServiceType" class="text-danger"></span> *@
                         </div>
 
                         <div class="form-floating mb-3">
